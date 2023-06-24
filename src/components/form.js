@@ -2,7 +2,14 @@ import React from "react";
 import '../css/form.css';
 import google from "../assests/google-icon.webp";
 import apple from "../assests/Apple-logo.png"
+import {useNavigate} from 'react-router-dom'
+import { signIn, useSession } from "next-auth/react";
+
+
+
 const SignIn = () => {
+    const { data: session } = useSession();
+    const navigate = useNavigate();
     return (
         <>
             <div className="wrapper">
@@ -12,7 +19,7 @@ const SignIn = () => {
                 </div>
                 <div className="direct_login">
                     <div className="google">
-                        <button><img src={google} /><label>Sign in with Google</label></button>
+                        <button onClick={(e)=>{e.preventDefault(); signIn()}}><img src={google} /><label>Sign in with Google</label></button>
                     </div>
                     <div className="apple">
                         <button><img src={apple} /><label>Sign in with Apple</label></button>
@@ -29,7 +36,7 @@ const SignIn = () => {
                     </div>
                     <div className="forgotPassword"><a href="#">Forgot Password ?</a></div>
                     <div className="sign_in_button">
-                        <button>Sign In</button>
+                        <button onClick={()=>{ navigate('/dashboard')}}>Sign In</button>
                     </div>
 
                 </div>
